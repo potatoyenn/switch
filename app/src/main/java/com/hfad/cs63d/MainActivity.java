@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         private TextView textHistory;
     private TextView textFavorites;
     private TextView textAZ;
+    ViewPager viewPager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         textFavorites = (TextView) findViewById(R.id.text_favorites);
         textAZ = (TextView) findViewById(R.id.text_az);
 
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+
+        viewPager.setAdapter(viewPagerAdapter);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
