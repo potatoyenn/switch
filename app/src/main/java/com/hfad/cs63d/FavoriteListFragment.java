@@ -26,7 +26,7 @@ public class FavoriteListFragment extends ListFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "ENTERING FAVORITES DISPLAY");
+        Log.d(TAG, "ENTERING FAVORITE DISPLAY");
 
         super.onCreate(savedInstanceState);
         try {
@@ -38,7 +38,7 @@ public class FavoriteListFragment extends ListFragment {
                     new String[]{FavoriteDatabaseHelper.ID_COL, FavoriteDatabaseHelper.TERM_COL},//columns to return
                     null,
                     null,
-                    FavoriteDatabaseHelper.TERM_COL,//group by term
+                    FavoriteDatabaseHelper.FAVORITE_COL,//group by term
                     null,
                     FavoriteDatabaseHelper.ID_COL + " DESC",//specify descending sort order
                     LIST_LIMIT);//set a limit of 50 terms
@@ -82,7 +82,7 @@ public class FavoriteListFragment extends ListFragment {
 
         cursor = db.query(
                 FavoriteDatabaseHelper.DICTIONARY_TABLE,
-                new String[]{FavoriteDatabaseHelper.TERM_COL},
+                new String[]{FavoriteDatabaseHelper.FAVORITE_COL},
                 FavoriteDatabaseHelper.ID_COL + " = ?",
                 new String[] {Long.toString(id)},
                 null,

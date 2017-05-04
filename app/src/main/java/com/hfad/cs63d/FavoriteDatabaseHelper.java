@@ -11,7 +11,7 @@ class FavoriteDatabaseHelper extends SQLiteOpenHelper {
     public SQLiteDatabase sqlDatabase;
     int count = 0;
 
-    private static final String DB_NAME = "dictionaryHistory";
+    private static final String DB_NAME = "dictionaryFavorite";
     private static final int DB_VERSION = 1;
 
     //package private table and column names

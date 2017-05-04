@@ -51,7 +51,7 @@ public class ResultActivity extends Activity {
             SQLiteDatabase db = dictionaryDatabaseHelper.getReadableDatabase();
             Cursor cursor = db.query(
                     DictionaryDatabaseHelper.DICTIONARY_TABLE,
-                    new String[] {DictionaryDatabaseHelper.ID_COL, DictionaryDatabaseHelper.TERM_COL, DictionaryDatabaseHelper.DEFINITION_COL},
+                    new String[] {DictionaryDatabaseHelper.ID_COL, DictionaryDatabaseHelper.TERM_COL, DictionaryDatabaseHelper.DEFINITION_COL, DictionaryDatabaseHelper.FAVORITES_COL},
                     DictionaryDatabaseHelper.TERM_COL + " = ?",
                     new String[] {query},
                     null,
