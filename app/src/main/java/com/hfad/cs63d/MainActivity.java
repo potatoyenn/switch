@@ -52,7 +52,13 @@ public class MainActivity extends AppCompatActivity {
                                 transaction.commit();
                                 break;
                             case R.id.action_favorites:
-                                //add your fragment here
+                                Log.d("MainActivity", "onNavigationItemSelected() " + item);
+                                transaction = fragmentManager.beginTransaction();
+                                listFragment = new FavoriteListFragment();
+                                transaction.replace(R.id.content_frame, listFragment);
+                                transaction.addToBackStack(null);
+                                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                transaction.commit();
                                 break;
                             case R.id.action_az:
                                 Log.d("MainActivity", "onNavigationItemSelected() " + item);

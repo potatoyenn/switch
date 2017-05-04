@@ -21,6 +21,14 @@
         android:layout_row="5"
         android:layout_column="0"/>
 
+    <CheckBox
+        android:id="@+id/favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorite"
+        android:layout_centerHorizontal="true"
+        android:onClick="onFavoriteClicked"/>
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

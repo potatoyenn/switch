@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View;
 
 public class ResultActivity extends Activity {
 
@@ -60,6 +62,7 @@ public class ResultActivity extends Activity {
                 Log.v(TAG, "cursor.moveToFirst()? " + cursor.moveToFirst());
                 String term = cursor.getString(1);
                 String definition = cursor.getString(2);
+                boolean isFavorite = (cursor.getInt(3)==1);
 
 //                //Term
 //                TextView termView = (TextView) findViewById(R.id.term);
@@ -91,11 +94,34 @@ public class ResultActivity extends Activity {
                 addTermToHistory(term, definition);
                 Log.v(TAG, "added term");
 
+                //Populate the favorite checkbox
+                CheckBox favorite = (CheckBox) findViewById(R.id.favorite); //set value of fav checkbox
+                favorite.setChecked(isFavorite);
+
+
             }else {
                 Toast toast = Toast.makeText(this, "Term not found", Toast.LENGTH_SHORT);
                 toast.show();
             }
             cursor.close();
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+    //Update database when checkbox is clicked
+    public void onFavoriteClicked (View view) {
+        int termNo = (Integer) getIntent().getExtras().get("termNo");
+        CheckBox favorite = (CheckBox) findViewById(R.id.favorite);
+        ContentValues termValues = new ContentValues();
+        termValues.put(DictionaryDatabaseHelper.FAVORITES_COL, favorite.isChecked());
+        SQLiteOpenHelper favoriteDatabaseHelper = new FavoriteDatabaseHelper(this);
+        try {
+            SQLiteDatabase db = favoriteDatabaseHelper.getWritableDatabase();
+            db.update(DictionaryDatabaseHelper.FAVORITES_COL, termValues, "=?", new String[]{
+                    Integer.toString(termNo)});
+            db.close();
         } catch (SQLiteException e) {
             Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
             toast.show();
